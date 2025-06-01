@@ -1,0 +1,25 @@
+[Info]
+Version = 3
+
+[Object]
+Pmd1 = D:\Work\VSProject\GakuenMME\model.pmx
+
+[Effect]
+Default = none
+Pmd1 = none
+Pmd1[0] = D:\Work\VSProject\GakuenMME\FX\Gakumas_BodyCo.fx
+Pmd1[1] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Body.fx
+Pmd1[2] = D:\Work\VSProject\GakuenMME\FX\Gakumas_EyeBrow.fx
+Pmd1[3] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Face.fx
+Pmd1[4] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Face.fx
+Pmd1[5] = D:\Work\VSProject\GakuenMME\FX\Gakumas_EyeBrow.fx
+Pmd1[6] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Face.fx
+Pmd1[7] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Face.fx
+Pmd1[8] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Eye.fx
+Pmd1[9] = D:\Work\VSProject\GakuenMME\FX\Gakumas_EyeHightlight.fx
+Pmd1[10] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Face.fx
+Pmd1[11] = D:\Work\VSProject\GakuenMME\FX\Gakumas_EyeBrow.fx
+Pmd1[12] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Hair.fx
+Pmd1[13] = D:\Work\VSProject\GakuenMME\FX\Gakumas_Hair.fx
+Pmd1[14] = D:\Work\VSProject\GakuenMME\FX\Gakumas_HairCo.fx
+
