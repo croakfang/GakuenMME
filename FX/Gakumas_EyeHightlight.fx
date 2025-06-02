@@ -599,7 +599,7 @@ float4 frag(v2f i) : SV_Target
     float3 SH = SampleSH(NormalWS);
     float3 SkyLight = max(SH, 0) * _GlobalLightParameter.x * G_BRDFData.diffuse;
 
-    float3 NormalVS = mul(UNITY_MATRIX_V, float4(NormalWS.xyz, 0.0)).xyz;
+    float3 NormalVS = mul(float4(NormalWS.xyz, 0.0), UNITY_MATRIX_V).xyz;
     float RimLight = 1 - dot(NormalVS, normalize(_MatCapRimLight.xyz));
     RimLight = pow(RimLight, _MatCapRimLight.w);
     float RimLightMask = min(DefDiffuse * DefDiffuse, 1.0f) * VertexColor.RimMask;
