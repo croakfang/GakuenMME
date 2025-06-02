@@ -53,7 +53,7 @@ struct BRDFData
 
 float4 _BaseColor = float4(1, 1, 1, 1);
 float4 _DefValue = float4(0.497999996, 0.720000029, 0, 0.194999993);
-float4 _RampAddColor = float4(1.5, 1.5, 1.5, 1);
+float4 _RampAddColor = float4(2, 2, 2, 1);
 float _VertexColor = 1;
 float4 _SpecularThreshold = float4(0.100000001, 0.5, 1, 1);
 float4 _FadeParam = float4(0.75, 2, 0.400000006, 4);
@@ -317,7 +317,7 @@ float4 LinearToGamma(float4 val)
 
 sampler sampler_BaseMap = sampler_state{texture = <_BaseMap>; MINFILTER = LINEAR;MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_ShadeMap = sampler_state{texture = <_ShadeMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
-sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
+sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>;MINFILTER = LINEAR;MAGFILTER = LINEAR;MIPFILTER = NONE;ADDRESSU = CLAMP;ADDRESSV = CLAMP;ADDRESSU = CLAMP;ADDRESSV = CLAMP;};
 sampler2D sampler_HighlightMap = sampler_state{texture = <_HighlightMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_DefMap = sampler_state{texture = <_DefMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_LayerMap = sampler_state{texture = <_LayerMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};

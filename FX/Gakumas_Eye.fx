@@ -317,7 +317,7 @@ float4 LinearToGamma(float4 val)
 
 sampler sampler_BaseMap = sampler_state{texture = <_BaseMap>; MINFILTER = LINEAR;MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_ShadeMap = sampler_state{texture = <_ShadeMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
-sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
+sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>;MINFILTER = LINEAR;MAGFILTER = LINEAR;MIPFILTER = NONE;ADDRESSU = CLAMP;ADDRESSV = CLAMP;ADDRESSU = CLAMP;ADDRESSV = CLAMP;};
 sampler2D sampler_HighlightMap = sampler_state{texture = <_HighlightMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_DefMap = sampler_state{texture = <_DefMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_LayerMap = sampler_state{texture = <_LayerMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};

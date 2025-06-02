@@ -317,7 +317,7 @@ float4 LinearToGamma(float4 val)
 
 sampler sampler_BaseMap = sampler_state{texture = <_BaseMap>; MINFILTER = LINEAR;MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_ShadeMap = sampler_state{texture = <_ShadeMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
-sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
+sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>;MINFILTER = LINEAR;MAGFILTER = LINEAR;MIPFILTER = NONE;ADDRESSU = CLAMP;ADDRESSV = CLAMP;ADDRESSU = CLAMP;ADDRESSV = CLAMP;};
 sampler2D sampler_HighlightMap = sampler_state{texture = <_HighlightMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_DefMap = sampler_state{texture = <_DefMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_LayerMap = sampler_state{texture = <_LayerMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
@@ -498,7 +498,7 @@ float4 frag(v2f i) : SV_Target
         float HairFadeZ = dot(_HeadUpDirection, ViewDirection);
         HairFadeZ = abs(HairFadeZ) - _FadeParam.z;
         HairFadeZ = saturate(HairFadeZ * _FadeParam.w);
-	
+        
         BaseMap.a = lerp(1, max(HairFadeX, HairFadeZ), BaseMap.a);
 	
         SpecularIntensity *= IsMicroHair ? 1 : 0;
@@ -530,14 +530,14 @@ float4 frag(v2f i) : SV_Target
 	
     float2 RampMapUV = float2(BaseLighting, 0);
     float4 RampMap = GammaToLinear(tex2D(sampler_RampMap, RampMapUV));
-
+    
     const float ShadowIntensity = _MatCapParam.z;
     float3 RampedLighting = lerp(BaseMap.xyz, ShadeMap.xyz * _ShadeMultiplyColor, RampMap.w * ShadowIntensity);
     float3 SkinRampedLighting = lerp(RampMap, RampMap.xyz * _ShadeMultiplyColor, RampMap.w);
     SkinRampedLighting = lerp(1, SkinRampedLighting, ShadowIntensity);
-    SkinRampedLighting = BaseMap * SkinRampedLighting;
-    RampedLighting = lerp(RampedLighting, SkinRampedLighting, ShadeMap.w);
 
+    RampedLighting = lerp(RampedLighting, SkinRampedLighting, ShadeMap.w);
+    
     float SkinSaturation = _SkinSaturation - 1;
     SkinSaturation = SkinSaturation * ShadeMap.w + 1.0f;
     RampedLighting = lerp(Luminance(RampedLighting), RampedLighting, SkinSaturation);
