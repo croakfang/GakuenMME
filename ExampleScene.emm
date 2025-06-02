@@ -3,7 +3,7 @@ Version = 3
 
 [Object]
 Pmd1 = D:\Work\VSProject\GakuenMME\model.pmx
-Pmd2 = D:\Work\VSProject\GakuenMME\model.pmx
+Pmd2 = D:\Work\VSProject\GakuenMME\model_no_fx.pmx
 
 [Effect]
 Default = none
