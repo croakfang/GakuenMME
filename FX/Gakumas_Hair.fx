@@ -91,7 +91,7 @@ float4x4 _MainLightWorldToShadow = float4x4(
     0, 0, 0, 1
 );
 
-Texture2D _BaseMap : MATERIALTEXTURE;
+Texture2D _BaseMap < string ResourceName = "../Texture2D/t_chr_fktn-cstm-0000_hir_col_alp.png"; >;
 Texture2D _ShadeMap < string ResourceName = "../Texture2D/t_chr_fktn-cstm-0000_hir_sdw.png"; >;
 Texture2D _RampMap < string ResourceName = "../Texture2D/t_chr_fktn-base-0000_rmp.png"; >;
 Texture2D _HighlightMap < string ResourceName = "../Texture2D/t_chr_fktn-cstm-0000_hir_hhl.png"; >;
