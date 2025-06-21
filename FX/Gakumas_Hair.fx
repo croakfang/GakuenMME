@@ -125,9 +125,12 @@ void Encode4BitTo8Bit(float4 A, float4 B, out float4 C)
 
 void Decode4BitFrom8Bit(float4 C, out float4 A, out float4 B)
 {
-    const float k = 1.0f / 16.0f;
-    float4 HighBit = floor(C * 15.9375f + 0.03125f);
-    float4 LowBit = C * 255.0f - HighBit * 16.0f;
+    float4 Scaled = round(C * 255.0f);
+    float4 HighBit = floor(Scaled / 16.0f);
+    float4 LowBit = Scaled - HighBit * 16.0f;
+    HighBit = clamp(HighBit, 0.0f, 15.0f);
+    LowBit = clamp(LowBit, 0.0f, 15.0f);
+    const float k = 1.0f / 15.0f;
     A = HighBit * k;
     B = LowBit * k;
 }
@@ -317,11 +320,11 @@ float4 LinearToGamma(float4 val)
 
 sampler sampler_BaseMap = sampler_state{texture = <_BaseMap>; MINFILTER = LINEAR;MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_ShadeMap = sampler_state{texture = <_ShadeMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
-sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>;MINFILTER = LINEAR;MAGFILTER = LINEAR;MIPFILTER = NONE;ADDRESSU = CLAMP;ADDRESSV = CLAMP;ADDRESSU = CLAMP;ADDRESSV = CLAMP;};
+sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>;MINFILTER = LINEAR;MAGFILTER = LINEAR;MIPFILTER = NONE;ADDRESSU = CLAMP;ADDRESSV = CLAMP;};
 sampler2D sampler_HighlightMap = sampler_state{texture = <_HighlightMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_DefMap = sampler_state{texture = <_DefMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_LayerMap = sampler_state{texture = <_LayerMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
-sampler2D sampler_RampAddMap = sampler_state{texture = <_RampAddMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
+sampler2D sampler_RampAddMap = sampler_state{texture = <_RampAddMap>; MINFILTER = POINT; MAGFILTER = POINT; MIPFILTER = NONE;ADDRESSU = CLAMP;ADDRESSV = CLAMP;};
 sampler2D sampler_ReflectionSphereMap = sampler_state{texture = <_ReflectionSphereMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 samplerCUBE sampler_VLSpecCube = sampler_state{texture = <_VLSpecCube>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 
@@ -507,7 +510,7 @@ float4 frag(v2f i) : SV_Target
     float4 RampAddMap = 0;
     float3 RampAddColor = 0;
 #ifdef _RAMPADD_ON
-    float2 RampAddMapUV = float2(saturate(DiffuseOffset + NormalMatS.z), 0.955 - VertexColor.RampAddID);
+    float2 RampAddMapUV = float2(saturate(DiffuseOffset + NormalMatS.z), 1 - VertexColor.RampAddID);
     RampAddMap = GammaToLinear(tex2D(sampler_RampAddMap, RampAddMapUV));
 	RampAddColor = RampAddMap.xyz * _RampAddColor.xyz;
 	
