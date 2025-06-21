@@ -58,7 +58,7 @@ float _VertexColor = 1;
 float4 _SpecularThreshold = float4(0.6, 0.05, 0, 0);
 float4 _FadeParam = float4(0.75, 2, 0.4, 4);
 float _ShaderType = 0;
-float _ClipValue = 0.33;
+float _ClipValue = 0.1;
 float _LayerWeight = 0;
 float _SkinSaturation = 1;
 float4 _MultiplyColor = float4(1, 1, 1, 1);
@@ -315,7 +315,7 @@ float4 LinearToGamma(float4 val)
     return float4(pow(val.xyz, 1.0 / 2.2), val.w);
 }
 
-sampler sampler_BaseMap = sampler_state{texture = <_BaseMap>; MINFILTER = LINEAR;MAGFILTER = LINEAR; MIPFILTER = NONE;};
+sampler sampler_BaseMap = sampler_state{texture = <_BaseMap>; MINFILTER = LINEAR;MAGFILTER = LINEAR; MIPFILTER = LINEAR;};
 sampler2D sampler_ShadeMap = sampler_state{texture = <_ShadeMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
 sampler2D sampler_RampMap = sampler_state{texture = <_RampMap>;MINFILTER = LINEAR;MAGFILTER = LINEAR;MIPFILTER = NONE;ADDRESSU = CLAMP;ADDRESSV = CLAMP;ADDRESSU = CLAMP;ADDRESSV = CLAMP;};
 sampler2D sampler_HighlightMap = sampler_state{texture = <_HighlightMap>; MINFILTER = LINEAR; MAGFILTER = LINEAR; MIPFILTER = NONE;};
@@ -684,7 +684,6 @@ technique MainTec < string MMDPass = "object"; >
         CULLMODE = CCW;
         ZENABLE = TRUE;
         ZWRITEENABLE = TRUE;
-        ALPHABLENDENABLE = FALSE;
     }
 };
 
@@ -697,6 +696,5 @@ technique MainTec_ss < string MMDPass = "object_ss"; >
         CULLMODE = CCW;
         ZENABLE = TRUE;
         ZWRITEENABLE = TRUE;
-        ALPHABLENDENABLE = FALSE;
     }
 };
